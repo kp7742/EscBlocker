@@ -1,0 +1,40 @@
+{
+	"manifest_version": 2,
+	"name": "EscBlocker",
+	"description": "Detect, Report and Block Unauthorised Browser Activity",
+	"version": "1.0.0",
+	"homepage_url": "https://github.com/kp7742/EscBlocker",
+	"icons": {
+		"64": "icons/icon.png"
+	},
+	"background": {
+		"scripts": [
+			"background.js"
+		]
+	},
+	"permissions": [
+		"tabs"
+	],
+	"commands": {
+		"detect-click": {
+			"suggested_key": { "default": "Ctrl+Shift+U" },
+			"description": "Detect Toggle"
+		},
+		"detect-zoom": {
+			"suggested_key": { "default": "F11" },
+			"description": "Detect Zoom"
+		}
+	},
+	"browser_action": {
+		"default_icon": {
+			"64": "icons/icon.png"
+		},
+		"default_title": "EscBlocker",
+		"default_popup": "popup.html"
+	},
+	"browser_specific_settings": {
+		"gecko": {
+			"id": "EscBlocker@kuldippatel.dev"
+		}
+	}
+}
