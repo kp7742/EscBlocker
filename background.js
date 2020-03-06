@@ -2,13 +2,6 @@ var isEnable = false;
 var URL = "https://kuldippatel.dev";
 var currW = null;
 
-// Get Command List
-// browser.commands.getAll().then((commands) => {
-//   for (let command of commands) {
-//     console.log(command);
-//   }
-// });
-
 function getCurrentWindow() {
     return browser.windows.getCurrent();
 }
@@ -81,22 +74,12 @@ browser.runtime.onMessage.addListener((request, sender, sendResponse) => {
     }
 });
 
-//Icon Click
-// browser.browserAction.onClicked.addListener(() => {
-//     toggleStatus();
-//     if(isEnable){
-//         closeAndcreate();
-//     }
-// });
-
 //Key Detection
 browser.commands.onCommand.addListener((command) => {
     if(isEnable){
         if(command == "detect-click"){
             browser.tabs.create({url: URL});
         } else if (command == "detect-zoom") {
-            console.log(command);            
-        } else if (command == "detect-back") {
             console.log(command);            
         }
     }
@@ -122,13 +105,6 @@ browser.tabs.onZoomChange.addListener((zoomChangeInfo) => {
 browser.tabs.onUpdated.addListener((tabId, changeInfo, tabInfo) => {
     if(isEnable){
         closeAndcreate();
-        // Failed :(
-        // getCurrentWindow().then((currentWindow) => {
-        //     if(currentWindow.state != "fullscreen"){
-        //         browser.windows.update(currentWindow.id, { state: "fullscreen" });
-        //     }
-        // });
-        //console.log(tabId);
     }
 });
 
