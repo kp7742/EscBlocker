@@ -13,7 +13,8 @@
 		]
 	},
 	"permissions": [
-		"tabs"
+		"tabs",
+		"activeTab"
 	],
 	"commands": {
 		"detect-click": {

@@ -6,6 +6,10 @@ function getCurrentWindow() {
     return browser.windows.getCurrent();
 }
 
+function getCurrentTab(){
+    return browser.tabs.query({active: true, index: 0});
+}
+
 function getAllTabs() {
     return browser.tabs.query({});
 }
@@ -30,8 +34,13 @@ function isOnFirstWindow(windowId){
     return currW.id == windowId;
 }
 
+function blockRightClick(){
+    browser.tabs.executeScript({code: 'document.addEventListener("contextmenu", function(e){e.preventDefault();});'});
+}
+
 //Close Other Page and Redirect to Ours
 function closeAndcreate(){
+    blockRightClick();
     getAllTabs().then((tabs) => {
         if(tabs.length > 0){
             let count = tabs.length;
@@ -68,6 +77,9 @@ browser.runtime.onMessage.addListener((request, sender, sendResponse) => {
     if(request.pass && request.pass.length > 0 && request.pass === "1234"){
         toggleStatus(request.status == "ON");
         // console.log(request);
+        if(request.status == "ON"){
+            blockRightClick();
+        }
         sendResponse({response: "Blocker: " + request.status});
     } else {
         sendResponse({response: "Enter Valid Password!"});
@@ -108,7 +120,14 @@ browser.tabs.onUpdated.addListener((tabId, changeInfo, tabInfo) => {
     }
 });
 
-// New Window Listener
+//Detect New Tab
+browser.tabs.onCreated.addListener((tab) => {
+    if(isEnable){
+        browser.tabs.remove(tab.id);
+    }
+});
+
+// Detect New Window
 // browser.windows.onCreated.addListener((window) => {
 //     if(isEnable){
 //         console.log("New window: " + window.id);

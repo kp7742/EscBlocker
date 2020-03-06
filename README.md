@@ -6,6 +6,9 @@ Web Extension to Detect, Report and Block Unauthorised Browser Activity in Event
 - Detection of Current Tab URL Change
 - Detection of Browser Window Change
 - Detection of Some Key Presses
+- Block Right Click
+- Block New Tab Opening
+- Block New Window Opening
 - Revert Back To Actual Page
 - Password based Toggle
 
