@@ -140,6 +140,10 @@ browser.windows.onFocusChanged.addListener((windowId) => {
         // console.log("Newly focused window: " + windowId);
         browser.windows.getAll().then((windowArr) => {
             windowArr.forEach((w, index) => {
+                // console.log(w);
+                // if(windowId == -1 && w.state == "minimized"){
+                //     browser.windows.update(currW.id, {focused: true, state: "maximized"});
+                // } else 
                 if(!isOnFirstWindow(w.id)){
                     // console.log("Different window: " + w.id);
                     browser.windows.remove(w.id);
